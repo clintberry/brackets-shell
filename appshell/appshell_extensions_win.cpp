@@ -1577,7 +1577,7 @@ int32 RemoveMenuItem(CefRefPtr<CefBrowser> browser, const ExtensionString& comma
 
 void Drag(CefRefPtr<CefBrowser> browser) {
     ReleaseCapture();
-    HWND browserHwnd = getMenuParent(browser);
+    HWND browserHwnd = (HWND)getMenuParent(browser);
     SendMessage(browserHwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0);
 }
     
