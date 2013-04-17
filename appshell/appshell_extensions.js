@@ -689,5 +689,5 @@ if (!appshell.app) {
     };
  
     // Alias the appshell object to brackets. This is temporary and should be removed.
-    brackets = appshell;
+    weave = appshell;
 })();
