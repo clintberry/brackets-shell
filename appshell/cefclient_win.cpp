@@ -551,7 +551,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
   int showCmd = SW_SHOW;
   RestoreWindowRect(left, top, width, height, showCmd);
 
-  DWORD styles = WS_OVERLAPPEDWINDOW;
+  DWORD styles = WS_VISIBLE | WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
   if (showCmd == SW_MAXIMIZE)
 	  styles |= WS_MAXIMIZE;
   hWndMain = CreateWindowEx(0, szWindowClass, szTitle, styles,
