@@ -43,7 +43,7 @@ module.exports = function (grunt) {
     }
     
     // task: full-build
-    grunt.registerTask("full-build", ["git", "create-project", "build", "build-branch", "build-num", "build-sha", "stage", "package"]);
+    grunt.registerTask("full-build", ["git", "create-project", "build", "build-branch", "build-www", "build-num", "build-sha", "stage", "package"]);
     grunt.registerTask("installer", ["full-build", "build-installer"]);
     
     // task: build
@@ -94,8 +94,7 @@ module.exports = function (grunt) {
             var done = this.async(),
                 promise = spawn([
                     "git checkout " + this.data.branch,
-                    "git pull origin " + this.data.branch,
-                    "git submodule update --init --recursive"
+                    "git pull origin " + this.data.branch
                 ], { cwd: repo });
         
             promise.then(function () {
@@ -107,6 +106,18 @@ module.exports = function (grunt) {
         } else {
             grunt.log.writeln("Skipping fetch for " + this.target + " repo");
         }
+    });
+
+    grunt.registerTask("build-www", "Run the grunt builder on the client application", function(){
+        var done = this.async(),
+            wwwRepo = resolve(grunt.config("git.www.repo"));
+        spawn(["grunt"], { cwd: wwwRepo })
+            .then(function (result) {
+                grunt.log.writeln("Build www " + result.stdout.trim());
+                done();
+            }, function () {
+                done(false);
+            });
     });
     
     // task: build-branch
@@ -193,7 +204,7 @@ module.exports = function (grunt) {
     
     // task: package
     grunt.registerTask("package", "Package www files", function () {
-        grunt.task.run(["clean:www","copy:www", "copy:samples", "write-config"]);
+        grunt.task.run(["clean:www","copy:www"/*, "copy:samples", "write-config"*/]);
     });
     
     // task: write-config

@@ -111,7 +111,7 @@ module.exports = function (grunt) {
                     {
                         "dot"       : true,
                         "expand"    : true,
-                        "cwd"       : "<%= git.www.repo %>/src",
+                        "cwd"       : "<%= git.www.repo %>/dev",
                         "src"       : ["**", "!**/.git*"],
                         "dest"      : "<%= build.staging %>/www/"
                     }
@@ -143,12 +143,12 @@ module.exports = function (grunt) {
             }
         },
         "build": {
-            "name"              : "Brackets",
+            "name"              : "Weave",
             "staging"           : staging
         },
         "git": {
             "www": {
-                "repo"      : "../client/dev",    // TODO user configurable?
+                "repo"      : "../client",    // TODO user configurable?
                 "branch"    : grunt.option("www-branch") || "develop"
             },
             "shell": {
