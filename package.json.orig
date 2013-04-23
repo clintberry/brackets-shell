@@ -1,7 +1,13 @@
 {
+<<<<<<< HEAD
     "name": "Client-Shell",
-    "version": "0.24.0-0",
+    "version": "0.23.0-0",
     "homepage": "http://getweave.com",
+=======
+    "name": "Brackets-Shell",
+    "version": "0.24.0-0",
+    "homepage": "http://brackets.io",
+>>>>>>> 017335d6efc4a6cf25764c2333660195eec50ff3
     "issues": {
         "url": "http://github.com/adobe/brackets-shell/issues"
     },
