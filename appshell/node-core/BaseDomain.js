@@ -29,7 +29,8 @@
     "use strict";
     
     var Launcher = require("./Launcher"),
-        Logger   = require("./Logger");
+        Logger   = require("./Logger"),
+        Ini = require("./thirdparty/node-ini/node-ini");
     
     /**
      * @private
@@ -76,6 +77,18 @@
             return false;
         }
     }
+
+    /*****************************
+      Load Our Config
+    *****************************/
+
+    function cmdLoadConfig(path) {
+        Logger.info('running cmdLoadConfig');
+        Logger.info('CWD: ' + process.cwd());
+        var cfg = Ini.parseSync(path);
+        Logger.info(cfg);
+        return cfg;
+    }
     
     /**
      *
@@ -113,6 +126,15 @@
                 "The paths should be absolute.",
             [{name: "paths", type: "array<string>"}],
             [{name: "success", type: "boolean"}]
+        );
+        _domainManager.registerCommand(
+            "base",
+            "loadConfig",
+            cmdLoadConfig,
+            false,
+            "Attempt to load an INI file",
+            [{name: "path", type: "string"}],
+            [{name: "success", type: "object"}]
         );
 
         _domainManager.registerEvent(
